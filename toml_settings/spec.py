@@ -119,4 +119,6 @@ def to_json(spec):
 
 
 def from_json(spec_json):
-    return SPEC_DEC.decode(spec_json).validate()
+    spec = SPEC_DEC.decode(spec_json)
+    spec.validate()
+    return spec
