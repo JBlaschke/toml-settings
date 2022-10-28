@@ -1,3 +1,4 @@
+from curses.ascii import SP
 from typing  import Any, Union, Type, List
 from pathlib import Path
 
@@ -111,3 +112,11 @@ ENC         = msgspec.json.Encoder(enc_hook=enc_hook)
 SETTING_DEC = msgspec.json.Decoder(Setting, dec_hook=dec_hook)
 SECTION_DEC = msgspec.json.Decoder(Section, dec_hook=dec_hook)
 SPEC_DEC    = msgspec.json.Decoder(Spec, dec_hook=dec_hook)
+
+
+def to_json(spec):
+    return ENC.encode(spec)
+
+
+def from_json(spec_json):
+    return SPEC_DEC.decode(spec_json).validate()
